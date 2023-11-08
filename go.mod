@@ -1,3 +1,3 @@
-module github.com/monopayments/kyc-go
+module github.com/monopayments/kyx
 
 go 1.20
