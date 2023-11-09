@@ -53,13 +53,13 @@ func (t *API) get(path string, payload interface{}, response interface{}) error 
 	}
 	return t.do(req, response)
 }
-func (t *API) delete(path string, payload interface{}) error {
+func (t *API) delete(path string, payload interface{}, response interface{}) error {
 	url := t.EndPoint + path
 	req, err := http.NewRequest("DELETE", url, nil)
 	if err != nil {
 		return err
 	}
-	return t.do(req, nil)
+	return t.do(req, response)
 }
 
 func (t *API) do(req *http.Request, response interface{}) error {
@@ -95,11 +95,7 @@ func (t *API) GetKyc(id string) (KycDto, error) {
 }
 func (t *API) DeleteKyc(id string) (KycDeleteResponse, error) {
 	var response KycDeleteResponse
-	err := t.delete("/kyc/"+id, &response)
-	if err != nil {
-		return KycDeleteResponse{}, err
-
-	}
-	return response, nil
+	err := t.delete("/kyc/"+id, nil, &response)
+	return response, err
 
 }
