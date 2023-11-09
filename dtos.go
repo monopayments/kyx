@@ -2,7 +2,7 @@ package kyx
 
 type KycCreate struct {
 	FirstName          string `json:"first_name" example:"Ahmet"`
-	RefranceID         string `json:"refrance_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
+	ReferenceID        string `json:"reference_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
 	LastName           string `json:"last_name" example:"Yılmaz"`
 	BirthYear          uint64 `json:"birth_year" example:"1990"`
 	BirthMonth         uint64 `json:"birth_month" example:"01"`
@@ -26,7 +26,7 @@ type KycDto struct {
 	HashID             string `json:"hash_id" example:"kKE4ZvqVgPl9d8eA8RDAxyGJz2onEC"`
 	FirstName          string `json:"first_name" example:"Ahmet"`
 	LastName           string `json:"last_name" example:"Yılmaz"`
-	RefranceID         string `json:"refrance_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
+	ReferenceID        string `json:"reference_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
 	BirthYear          uint64 `json:"birth_year" example:"1990"`
 	BirthMonth         uint64 `json:"birth_month" example:"01"`
 	BirthDay           uint64 `json:"birth_day" example:"01"`
