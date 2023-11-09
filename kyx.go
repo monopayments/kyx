@@ -94,7 +94,8 @@ func (t *API) GetKyc(id string) (KycDto, error) {
 	return response, err
 }
 func (t *API) DeleteKyc(id string) (string, error) {
-	res := t.delete("/kyc/"+id, nil)
+	var response KycDeleteResponse
+	res := t.delete("/kyc/"+id, &response)
 	if res != nil {
 		return "", res
 	}

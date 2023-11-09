@@ -21,6 +21,10 @@ type KycCreateResponse struct {
 	Message string `json:"message" example:"Kyc created successfully"`
 	Error   string `json:"error" example:""`
 } // @name KycCreateResponseDto
+type KycDeleteResponse struct {
+	Message string `json:"message" example:"Kyc deleted successfully"`
+	Error   string `json:"error" example:""`
+} // @name KycDeleteResponseDto
 type KycDto struct {
 	ID                 string `json:"id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
 	HashID             string `json:"hash_id" example:"kKE4ZvqVgPl9d8eA8RDAxyGJz2onEC"`
