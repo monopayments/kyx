@@ -91,6 +91,7 @@ type MakeKycResponse struct {
 	KycId       string `json:"kyc_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
 	KycState    string `json:"kyc_state" example:"1"`
 	KycLevel    uint64 `json:"kyc_level" example:"10"`
+	Error       string `json:"error" example:""`
 }
 type InfoKyc struct {
 	KycProvider string `json:"kyc_provider" example:"1"`
@@ -103,4 +104,5 @@ type InfoKycResponse struct {
 	KycId       string `json:"kyc_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
 	KycState    string `json:"kyc_state" example:"1"`
 	KycLevel    uint64 `json:"kyc_level" example:"10"`
+	Error       string `json:"error" example:""`
 }
