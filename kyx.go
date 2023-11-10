@@ -99,3 +99,13 @@ func (t *API) DeleteKyc(id string) (KycDeleteResponse, error) {
 	return response, err
 
 }
+func (t *API) MakeKyc(payload MakeKyc) (MakeKycResponse, error) {
+	var response MakeKycResponse
+	err := t.post("/kyc/make", payload, &response)
+	return response, err
+}
+func (t *API) InfoKyc(payload InfoKyc) (InfoKycResponse, error) {
+	var response InfoKycResponse
+	err := t.post("/kyc/info", payload, &response)
+	return response, err
+}
