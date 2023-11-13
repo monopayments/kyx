@@ -69,7 +69,7 @@ type MakeKyc struct {
 	DocumentExpireDate           string `json:"document_expire_date" example:"2021-01-01"`
 	DocumentFrontImage           string `json:"document_front_image" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
 	DocumentBackImage            string `json:"document_back_image" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
-	ProvienceID                  string `json:"province_id" example:"1"`
+	ProvienceID                  string `json:"provience_id" example:"1"`
 	ReferenceId                  string `json:"reference_id" example:"1"`
 	SectorId                     string `json:"sector_id" example:"1"`
 	ZipCode                      string `json:"zip_code" example:"1"`

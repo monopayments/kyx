@@ -45,22 +45,22 @@ func (t *API) post(path string, payload interface{}, response interface{}) error
 	return t.do(req, response)
 }
 
-func (t *API) get(path string, payload interface{}, response interface{}) error {
-	url := t.EndPoint + path
-	req, err := http.NewRequest("GET", url, nil)
-	if err != nil {
-		return err
-	}
-	return t.do(req, response)
-}
-func (t *API) delete(path string, payload interface{}, response interface{}) error {
-	url := t.EndPoint + path
-	req, err := http.NewRequest("DELETE", url, nil)
-	if err != nil {
-		return err
-	}
-	return t.do(req, response)
-}
+// func (t *API) get(path string, payload interface{}, response interface{}) error {
+// 	url := t.EndPoint + path
+// 	req, err := http.NewRequest("GET", url, nil)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return t.do(req, response)
+// }
+// func (t *API) delete(path string, payload interface{}, response interface{}) error {
+// 	url := t.EndPoint + path
+// 	req, err := http.NewRequest("DELETE", url, nil)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return t.do(req, response)
+// }
 
 func (t *API) do(req *http.Request, response interface{}) error {
 	req.Header.Set("x-mono-org-auth", t.Token)
@@ -82,26 +82,9 @@ func (t *API) do(req *http.Request, response interface{}) error {
 	return nil
 }
 
-func (t *API) CreateKyc(payload KycCreate) (KycCreateResponse, error) {
-	var response KycCreateResponse
-	err := t.post("/kyc", payload, &response)
-
-	return response, err
-}
-func (t *API) GetKyc(id string) (KycDto, error) {
-	var response KycDto
-	err := t.get("/kyc/"+id, nil, &response)
-	return response, err
-}
-func (t *API) DeleteKyc(id string) (KycDeleteResponse, error) {
-	var response KycDeleteResponse
-	err := t.delete("/kyc/"+id, nil, &response)
-	return response, err
-
-}
-func (t *API) MakeKyc(payload MakeKyc) (MakeKycResponse, error) {
+func (t *API) CreateKyc(payload MakeKyc) (MakeKycResponse, error) {
 	var response MakeKycResponse
-	err := t.post("/kyc/make", payload, &response)
+	err := t.post("/kyc/create", payload, &response)
 	return response, err
 }
 func (t *API) InfoKyc(payload InfoKyc) (InfoKycResponse, error) {
