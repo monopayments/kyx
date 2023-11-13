@@ -45,6 +45,21 @@ func (t *API) post(path string, payload interface{}, response interface{}) error
 	return t.do(req, response)
 }
 
+// update
+func (t *API) put(path string, payload interface{}, response interface{}) error {
+	url := t.EndPoint + path
+	jsonPayload, err := json.Marshal(payload)
+	if err != nil {
+		return err
+	}
+	req, err := http.NewRequest("PUT", url, bytes.NewBuffer(jsonPayload))
+	if err != nil {
+		return err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	return t.do(req, response)
+}
+
 // func (t *API) get(path string, payload interface{}, response interface{}) error {
 // 	url := t.EndPoint + path
 // 	req, err := http.NewRequest("GET", url, nil)
@@ -90,5 +105,10 @@ func (t *API) CreateKyc(payload MakeKyc) (MakeKycResponse, error) {
 func (t *API) InfoKyc(payload InfoKyc) (InfoKycResponse, error) {
 	var response InfoKycResponse
 	err := t.post("/kyc/info", payload, &response)
+	return response, err
+}
+func (t *API) UpdateKyc(kycId string, payload UpdateKyc) (InfoKycResponse, error) {
+	var response InfoKycResponse
+	err := t.put("/kyc/"+kycId+"/update", payload, &response)
 	return response, err
 }
