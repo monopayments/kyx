@@ -112,3 +112,25 @@ func (t *API) UpdateKyc(kycId string, payload UpdateKyc) (InfoKycResponse, error
 	err := t.put("/kyc/"+kycId+"/update", payload, &response)
 	return response, err
 }
+
+// ark-signer
+func (t *API) FaceMatch(payload FaceMatchRequest) (ArkSignerResponseMessage, error) {
+	var response ArkSignerResponseMessage
+	err := t.post("/arksigner/face", payload, &response)
+	return response, err
+}
+func (t *API) VerifyTCKKFront(payload VerifyRequest) (ArkSignerResponseMessage, error) {
+	var response ArkSignerResponseMessage
+	err := t.post("/arksigner/tckk/front", payload, &response)
+	return response, err
+}
+func (t *API) VerifyTCKKBack(payload VerifyRequest) (ArkSignerResponseMessage, error) {
+	var response ArkSignerResponseMessage
+	err := t.post("/arksigner/tckk/back", payload, &response)
+	return response, err
+}
+func (t *API) Contactless(payload ContactlessRequestDTO) (ArkSignerResponseMessage, error) {
+	var response ArkSignerResponseMessage
+	err := t.post("/arksigner/contactless", payload, &response)
+	return response, err
+}
