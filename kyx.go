@@ -45,7 +45,6 @@ func (t *API) post(path string, payload interface{}, response interface{}) error
 	return t.do(req, response)
 }
 
-// update
 func (t *API) put(path string, payload interface{}, response interface{}) error {
 	url := t.EndPoint + path
 	jsonPayload, err := json.Marshal(payload)
