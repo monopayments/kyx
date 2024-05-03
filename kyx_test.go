@@ -37,6 +37,7 @@ func TestKyc(t *testing.T) {
 		BirthYear:                    1990,
 		BirthMonth:                   1,
 		BirthDay:                     1,
+		Nationality:                  "TR",
 		NationalID:                   "12345678901",
 		CountryCode:                  "TR",
 		City:                         "Istanbul",

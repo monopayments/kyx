@@ -6,6 +6,7 @@ type MakeKyc struct {
 	BirthYear                    uint64 `json:"birth_year" example:"1990"`
 	BirthMonth                   uint64 `json:"birth_month" example:"01"`
 	BirthDay                     uint64 `json:"birth_day" example:"01"`
+	Nationality                  string `json:"nationality" example:"TR"`
 	NationalID                   string `json:"national_id" example:"12345678901"`
 	CountryCode                  string `json:"country_code" example:"TR"`
 	City                         string `json:"city" example:"Istanbul"`
@@ -33,6 +34,7 @@ type MakeKyc struct {
 	AddressLine2                 string `json:"address_line_2" example:"1"`
 	Gender                       string `json:"gender"`
 	State                        string `json:"state"`
+	ResidenceProofDocument       string `json:"residence_proof_document" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
 }
 type UpdateKyc struct {
 	FirstName                    string `json:"first_name" example:"Ahmet"`
@@ -40,6 +42,7 @@ type UpdateKyc struct {
 	BirthYear                    uint64 `json:"birth_year" example:"1990"`
 	BirthMonth                   uint64 `json:"birth_month" example:"01"`
 	BirthDay                     uint64 `json:"birth_day" example:"01"`
+	Nationality                  string `json:"nationality" example:"TR"`
 	NationalID                   string `json:"national_id" example:"12345678901"`
 	CountryCode                  string `json:"country_code" example:"TR"`
 	City                         string `json:"city" example:"Istanbul"`
@@ -67,6 +70,7 @@ type UpdateKyc struct {
 	AddressLine2                 string `json:"address_line_2" example:"1"`
 	Gender                       string `json:"gender"`
 	State                        string `json:"state"`
+	ResidenceProofDocument       string `json:"residence_proof_document" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
 }
 type MakeKycResponse struct {
 	Message     string `json:"message" example:"Kyc created successfully"`
