@@ -86,13 +86,12 @@ type InfoKyc struct {
 	KycId       string `json:"kyc_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
 }
 type InfoKycResponse struct {
-	Message                string `json:"message" example:"Kyc created successfully"`
-	ReferenceId            string `json:"reference_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
-	KycId                  string `json:"kyc_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
-	KycState               string `json:"kyc_state" example:"1"`
-	KycLevel               uint64 `json:"kyc_level" example:"10"`
-	Error                  string `json:"error" example:""`
-	RejectReason           uint64 `json:"reject_reason"`
-	RejectNote             string `json:"reject_note"`
-	ResidenceProofDocument string `json:"residence_proof_document" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
+	Message      string `json:"message" example:"Kyc created successfully"`
+	ReferenceId  string `json:"reference_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
+	KycId        string `json:"kyc_id" example:"f0a0a1e9-69bd-4bef-b8c6-4e8c0d3a1212"`
+	KycState     string `json:"kyc_state" example:"1"`
+	KycLevel     uint64 `json:"kyc_level" example:"10"`
+	Error        string `json:"error" example:""`
+	RejectReason uint64 `json:"reject_reason"`
+	RejectNote   string `json:"reject_note"`
 }
