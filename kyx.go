@@ -3,7 +3,7 @@ package kyx
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"time"
@@ -60,11 +60,18 @@ func (t *API) put(path string, payload interface{}, response interface{}) error 
 	return t.do(req, response)
 }
 
-func (t *API) get(path string, payload interface{}, response interface{}) error {
+func (t *API) get(path string, payload interface{}, response interface{}, headers ...map[string]string) error {
 	url := t.EndPoint + path
+	fmt.Println(url)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	if len(headers) > 0 {
+		for k, v := range headers[0] {
+			req.Header.Set(k, v)
+		}
 	}
 	return t.do(req, response)
 }
@@ -139,15 +146,7 @@ func (t *API) Contactless(payload ContactlessRequestDTO) (ArkSignerResponseMessa
 func (t *API) AmlSearchByName(payload AmlCheckRequest) (AmlCheckResponse, error) {
 	var response AmlCheckResponse
 	apiPath := "/aml/user-aml"
-	if payload.Name == "" {
-		return response, errors.New("name is required")
-	}
-	apiPath = "?name=" + payload.Name
 
-	if payload.ReferenceID != "" {
-		apiPath = "&reference_id=" + payload.ReferenceID
-	}
-
-	err := t.get(apiPath, nil, &response)
+	err := t.post(apiPath, payload, &response)
 	return response, err
 }

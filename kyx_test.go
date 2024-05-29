@@ -1,13 +1,14 @@
 package kyx
 
 import (
+	"fmt"
 	"testing"
 )
 
 var testClint *API
 
 func InitNewAPI() {
-	token := ""
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJPcmdhbml6YXRpb25JRCI6ImUyYjllMzQzLTg3ZjktNDk3ZS05ZTkzLWRjNzc0MDk1YTI3OCIsIkFjY291bnRJRCI6ImEyMjg3ODVkLWIxYWUtNDUwZi1hMTU2LWU0ZjMwY2VlODczMiIsImlzcyI6Im1vbm8ta3l4IiwiZXhwIjoxNzE5NTg5NzM3fQ.689pUie7M8IQmeYIzII0ShODpmKpvow_qDuXg_7qT_w"
 	testClint = NewAPI(token)
 }
 
@@ -89,4 +90,28 @@ func TestKyc(t *testing.T) {
 	}
 	t.Log("kyc info", infoRes)
 
+}
+
+func TestAmlSearch(t *testing.T) {
+	req := AmlCheckRequest{
+		Name:        "STEVEN ALIRABAKI",
+		ReferenceID: "D0001371250",
+	}
+
+	res, err := testClint.AmlSearchByName(req) //this function runs a aml check process
+
+	if err != nil {
+		t.Fatalf("Errori: %v", err)
+		return
+	}
+
+	if res.Error != "" {
+		t.Fatalf("Errorr: %v", res.Error)
+		return
+	}
+
+	fmt.Println("aml search ress", res)
+	t.Log("aml safelist ", res.IsSafeList)
+	t.Log("aml is white list", res.IsWhiteList)
+	t.Log("aml risk level", res.RiskLevelID)
 }
