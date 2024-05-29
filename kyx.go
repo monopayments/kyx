@@ -3,6 +3,7 @@ package kyx
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"time"
@@ -59,22 +60,22 @@ func (t *API) put(path string, payload interface{}, response interface{}) error 
 	return t.do(req, response)
 }
 
-// func (t *API) get(path string, payload interface{}, response interface{}) error {
-// 	url := t.EndPoint + path
-// 	req, err := http.NewRequest("GET", url, nil)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return t.do(req, response)
-// }
-// func (t *API) delete(path string, payload interface{}, response interface{}) error {
-// 	url := t.EndPoint + path
-// 	req, err := http.NewRequest("DELETE", url, nil)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return t.do(req, response)
-// }
+func (t *API) get(path string, payload interface{}, response interface{}) error {
+	url := t.EndPoint + path
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return err
+	}
+	return t.do(req, response)
+}
+func (t *API) delete(path string, payload interface{}, response interface{}) error {
+	url := t.EndPoint + path
+	req, err := http.NewRequest("DELETE", url, nil)
+	if err != nil {
+		return err
+	}
+	return t.do(req, response)
+}
 
 func (t *API) do(req *http.Request, response interface{}) error {
 	req.Header.Set("x-mono-org-auth", t.Token)
@@ -131,5 +132,22 @@ func (t *API) VerifyTCKKBack(payload VerifyRequest) (ArkSignerResponseMessage, e
 func (t *API) Contactless(payload ContactlessRequestDTO) (ArkSignerResponseMessage, error) {
 	var response ArkSignerResponseMessage
 	err := t.post("/arksigner/contactless", payload, &response)
+	return response, err
+}
+
+// aml
+func (t *API) AmlSearchByName(payload AmlCheckRequest) (AmlCheckResponse, error) {
+	var response AmlCheckResponse
+	apiPath := "/aml/user-aml"
+	if payload.Name == "" {
+		return response, errors.New("name is required")
+	}
+	apiPath = "?name=" + payload.Name
+
+	if payload.ReferenceID != "" {
+		apiPath = "&reference_id=" + payload.ReferenceID
+	}
+
+	err := t.get(apiPath, nil, &response)
 	return response, err
 }
