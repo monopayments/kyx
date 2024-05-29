@@ -12,4 +12,5 @@ type AmlCheckResponse struct {
 	WhiteListMessage   string `json:"white_list_message"`
 	RiskLevelID        int64  `json:"risk_level_id"`
 	IsSafeList         bool   `json:"is_safe_list"`
+	Error              string `json:"error" example:""`
 }
