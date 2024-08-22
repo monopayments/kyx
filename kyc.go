@@ -35,6 +35,7 @@ type MakeKyc struct {
 	Gender                       string `json:"gender"`
 	State                        string `json:"state"`
 	ResidenceProofDocument       string `json:"residence_proof_document" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
+	SelfieMedia                  string `json:"selfie_media" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
 }
 type UpdateKyc struct {
 	FirstName                    string `json:"first_name" example:"Ahmet"`
@@ -71,6 +72,7 @@ type UpdateKyc struct {
 	Gender                       string `json:"gender"`
 	State                        string `json:"state"`
 	ResidenceProofDocument       string `json:"residence_proof_document" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
+	SelfieMedia                  string `json:"selfie_media" example:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eA"`
 }
 type MakeKycResponse struct {
 	Message     string `json:"message" example:"Kyc created successfully"`
