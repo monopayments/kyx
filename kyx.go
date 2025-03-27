@@ -150,3 +150,9 @@ func (t *API) AmlSearchByName(payload AmlCheckRequest) (AmlCheckResponse, error)
 	err := t.post(apiPath, payload, &response)
 	return response, err
 }
+
+func (t *API) GetRiskLevels(kycId string) (RiskLevelsResponse, error) {
+	var response RiskLevelsResponse
+	err := t.get("/kyc/"+kycId+"/risks", nil, &response)
+	return response, err
+}

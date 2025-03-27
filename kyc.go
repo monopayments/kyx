@@ -97,3 +97,15 @@ type InfoKycResponse struct {
 	RejectReason uint64 `json:"reject_reason"`
 	RejectNote   string `json:"reject_note"`
 }
+
+type RiskLevelsResponse struct {
+	CaseStatus        string `json:"case_status" example:"1"`
+	ScanDate          string `json:"scan_date" example:"2021-01-01"`
+	MatchStatusId     int    `json:"match_status_id" example:"1"`
+	MatchStatusString string `json:"match_status_string" example:"1"`
+	RiskLevelId       int    `json:"risk_level_id" example:"1"`
+	RiskLevelString   string `json:"risk_level_string" example:"1"`
+	IsSafeList        bool   `json:"is_safe_list" example:"1"`
+	IsWhiteList       bool   `json:"is_white_list" example:"1"`
+	Error             string `json:"error" example:""`
+}
