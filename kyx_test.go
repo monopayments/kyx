@@ -5,11 +5,11 @@ import (
 	"testing"
 )
 
-var testClint *API
+var testClient *API
 
 func InitNewAPI() {
-	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJPcmdhbml6YXRpb25JRCI6ImUyYjllMzQzLTg3ZjktNDk3ZS05ZTkzLWRjNzc0MDk1YTI3OCIsIkFjY291bnRJRCI6ImEyMjg3ODVkLWIxYWUtNDUwZi1hMTU2LWU0ZjMwY2VlODczMiIsImlzcyI6Im1vbm8ta3l4IiwiZXhwIjoxNzE5NTg5NzM3fQ.689pUie7M8IQmeYIzII0ShODpmKpvow_qDuXg_7qT_w"
-	testClint = NewAPI(token)
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJPcmdhbml6YXRpb25JRCI6Ijc2OTZkYTVlLWQ4MDgtNDI5Ny1iZTY1LTIwOWUwNTUxOGRlMiIsIkFjY291bnRJRCI6ImU2YTE2MWZmLWQ2NmMtNDIyNy05M2NiLWVhN2MyMDUxMDgzYiIsImlzcyI6Im1vbm8ta3l4IiwiZXhwIjoxNzcxMTYxNDcyfQ.ZnCvCGPQpohT596Abas1iHOadRqfba63g8E_SImFwJQ"
+	testClient = NewCustomAPI("http://localhost:3000/api/public", token)
 }
 
 func init() {
@@ -22,7 +22,7 @@ func TestKyc(t *testing.T) {
 		LastName:  "Yılmaz",
 	}
 
-	res, err := testClint.CreateKyc(makeKyc) //this function runs a user creation process
+	res, err := testClient.CreateKyc(makeKyc) //this function runs a user creation process
 	if err != nil {
 		t.Fatalf("Error: %v", err)
 		return
@@ -65,7 +65,7 @@ func TestKyc(t *testing.T) {
 		Gender:                       "1",
 		State:                        "1",
 	}
-	updateRes, err := testClint.UpdateKyc(res.KycId, updateKyc) //this function runs a user update process
+	updateRes, err := testClient.UpdateKyc(res.KycId, updateKyc) //this function runs a user update process
 	if err != nil {
 		t.Fatalf("Error: %v", err)
 		return
@@ -79,7 +79,7 @@ func TestKyc(t *testing.T) {
 		KycId:       res.KycId,
 		ReferenceId: res.ReferenceId,
 	}
-	infoRes, err := testClint.InfoKyc(r) //this function runs a user info process
+	infoRes, err := testClient.InfoKyc(r) //this function runs a user info process
 	if err != nil {
 		t.Fatalf("Error: %v", err)
 		return
@@ -98,7 +98,7 @@ func TestAmlSearch(t *testing.T) {
 		ReferenceID: "D0001371250",
 	}
 
-	res, err := testClint.AmlSearchByName(req) //this function runs a aml check process
+	res, err := testClient.AmlSearchByName(req) //this function runs a aml check process
 
 	if err != nil {
 		t.Fatalf("Errori: %v", err)
@@ -114,4 +114,25 @@ func TestAmlSearch(t *testing.T) {
 	t.Log("aml safelist ", res.IsSafeList)
 	t.Log("aml is white list", res.IsWhiteList)
 	t.Log("aml risk level", res.RiskLevelID)
+}
+
+func TestSearchByName(t *testing.T) {
+	req := SearchByNameKycRequest{
+		FirstName: "ABIGAIL",
+		LastName:  "DAMASANE"}
+	res, err := testClient.SearchByName(req) //this function runs a sanction scanner process
+
+	if err != nil {
+		t.Fatalf("Error: %v", err)
+		return
+	}
+
+	if res.Error != "" {
+		t.Fatalf("Error: %v", res.Error)
+		return
+	}
+	if len(res.Result) > 0 {
+		t.Log("first record id", res.Result[0])
+	}
+	fmt.Println("search by name ress", res)
 }
