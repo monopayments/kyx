@@ -109,6 +109,12 @@ func (t *API) CreateKyc(payload MakeKyc) (MakeKycResponse, error) {
 	err := t.post("/kyc/create", payload, &response)
 	return response, err
 }
+func (t *API) SearchByName(payload SearchByNameKycRequest) (SanctionScanner, error) {
+	var response SanctionScanner
+	err := t.post("/kyc/search-by-name", payload, &response)
+	return response, err
+
+}
 func (t *API) InfoKyc(payload InfoKyc) (InfoKycResponse, error) {
 	var response InfoKycResponse
 	err := t.post("/kyc/info", payload, &response)

@@ -109,3 +109,88 @@ type RiskLevelsResponse struct {
 	IsWhiteList       bool   `json:"is_white_list" example:"1"`
 	Error             string `json:"error" example:""`
 }
+
+type SearchByNameKycRequest struct {
+	FirstName string `json:"first_name" example:"Ahmet"`
+	LastName  string `json:"last_name" example:"Yılmaz"`
+}
+
+type SanctionScanner struct {
+	TotalRecordCount   int64  `json:"total_record_count"`
+	ReturnRecordCount  int64  `json:"return_record_count"`
+	TotalProfileCount  int64  `json:"total_profile_count"`
+	Start              int64  `json:"start"`
+	Limit              int64  `json:"limit"`
+	ReferenceNumber    string `json:"reference_number"`
+	OutReferenceNumber string `json:"out_reference_number"`
+	MatchStatus        string `json:"match_status"`
+	RiskLevel          string `json:"risk_level"`
+	IsWhiteList        bool   `json:"is_white_list"`
+	WhiteListMessage   string `json:"white_list_message"`
+	MatchStatusID      int64  `json:"match_status_id"`
+	RiskLevelID        int64  `json:"risk_level_id"`
+	// AssignedUserGUIDID interface{} `json:"assigned_user_guid_id"`
+	NameSearchType   string                `json:"name_search_type"`
+	NameSearchTypeID int64                 `json:"name_search_type_id"`
+	MinMatchRate     int64                 `json:"min_match_rate"`
+	MaxMatchRate     int64                 `json:"max_match_rate"`
+	BirthYear        int                   `json:"birth_year"`
+	IsSafeList       bool                  `json:"is_safe_list"`
+	NationalyFilter  string                `json:"nationaly_filter"`
+	IsZFS            bool                  `json:"is_zfs"`
+	KycId            string                `json:"kyc_id"`
+	Error            string                `json:"error" example:""`
+	Result           SanctionScannerResult `json:"result" gorm:"type:jsonb"`
+}
+type SanctionScannerResult []ResultElement
+type ResultElement struct {
+	MatchRate         interface{}                 `json:"MatchRate"`
+	IsMatchAka        bool                        `json:"IsMatchAka"`
+	FirstName         string                      `json:"FirstName"`
+	MiddleName        string                      `json:"MiddleName"`
+	LastName          string                      `json:"LastName"`
+	FullName          string                      `json:"FullName"`
+	Nationality       string                      `json:"Nationality"`
+	ProgramName       string                      `json:"ProgramName"`
+	Position          string                      `json:"Position"`
+	Country           string                      `json:"Country"`
+	SanctionSet       string                      `json:"SanctionSet"`
+	Origin            string                      `json:"Origin"`
+	DeathYear         string                      `json:"DeathYear"`
+	IsAutoResolved    bool                        `json:"IsAutoResolved"`
+	Title             string                      `json:"Title"`
+	Gender            string                      `json:"Gender"`
+	Function          string                      `json:"Function"`
+	Language          string                      `json:"Language"`
+	CitizenDetail     string                      `json:"CitizenDetail"`
+	CountryCode       string                      `json:"CountryCode"`
+	Email             string                      `json:"Email"`
+	BirthDate         string                      `json:"BirthDate"`
+	EntityType        string                      `json:"EntityType"`
+	Type              string                      `json:"Type"`
+	Summary           string                      `json:"Summary"`
+	FatherName        string                      `json:"FatherName"`
+	BlackListTypeID   string                      `json:"BlackListTypeId"`
+	BlacklistName     string                      `json:"BlacklistName"`
+	BlacklistFlagCode string                      `json:"BlacklistFlagCode"`
+	BirthDetails      SanctionScannerBirthDetails `json:"BirthDetails"`
+	OtherNames        SanctionScannerOtherNames   `json:"OtherNames"`
+}
+
+type SanctionScannerBirthDetails []BirthDetail
+type SanctionScannerOtherNames []OtherName
+
+type OtherName struct {
+	NameType         string `json:"NameType"`
+	FullName         string `json:"FullName"`
+	Language         string `json:"Language"`
+	OtherInformation string `json:"OtherInformation"`
+	Quality          string `json:"Quality"`
+}
+type BirthDetail struct {
+	BirthDate        string `json:"BirthDate"`
+	BirthYear        int    `json:"BirthYear"`
+	BirthPlace       string `json:"BirthPlace"`
+	BirthCountry     string `json:"BirthCountry"`
+	OtherInformation string `json:"OtherInformation"`
+}
